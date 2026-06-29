@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position Size Calculator | Professional Risk Management Tool</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>Position Size Calculator</h1>
+            <p>Professional Risk Management Tool</p>
+        </header>
+
+        <main class="calculator-grid">
+            
+            <section class="card input-card">
+                <div class="card-header">
+                    <h2>Trade Parameters</h2>
+                    <button id="btnClear" class="btn btn-secondary">Clear</button>
+                </div>
+                
+                <form id="calcForm" autocomplete="off">
+                    <div class="input-group">
+                        <label for="accountBalance">Account Balance ($)</label>
+                        <input type="number" id="accountBalance" value="5000" step="any" min="0" required>
+                    </div>
+
+                    <!-- Direction Toggle -->
+                    <div class="input-group">
+                        <label>Trade Direction</label>
+                        <div class="direction-toggle">
+                            <button type="button" id="btnBuy" class="dir-btn active">Buy / Long</button>
+                            <button type="button" id="btnSell" class="dir-btn">Sell / Short</button>
+                        </div>
+                        <input type="hidden" id="tradeDirection" value="BUY">
+                    </div>
+
+                    <div class="row">
+                        <div class="input-group col-6">
+                            <label for="riskType">Risk Type</label>
+                            <select id="riskType">
+                                <option value="percent">Risk %</option>
+                                <option value="cash">Risk $</option>
+                            </select>
+                        </div>
+                        <div class="input-group col-6">
+                            <label id="riskValueLabel" for="riskValue">Risk Value (%)</label>
+                            <input type="number" id="riskValue" value="0.5" step="any" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="asset">Asset Class</label>
+                        <select id="asset">
+                            <option value="XAUUSD" data-pip="0.1" data-lot="100">XAUUSD (Gold)</option>
+                            <option value="BTCUSD" data-pip="1" data-lot="1">BTCUSD (Bitcoin)</option>
+                            <option value="EURUSD" data-pip="0.0001" data-lot="100000">EURUSD (Euro)</option>
+                            <option value="GBPUSD" data-pip="0.0001" data-lot="100000">GBPUSD (Pound)</option>
+                            <option value="US30" data-pip="1" data-lot="1">US30 (Dow Jones)</option>
+                            <option value="NAS100" data-pip="1" data-lot="1">NAS100 (Nasdaq)</option>
+                            <option value="custom" data-pip="0.01" data-lot="1" selected>Custom / Standard Asset</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="entryPrice">Entry Price</label>
+                        <input type="number" id="entryPrice" placeholder="0.00" step="any" min="0" required>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-group col-6">
+                            <label for="stopLoss">Stop Loss Price</label>
+                            <input type="number" id="stopLoss" placeholder="0.00" step="any" min="0" required>
+                        </div>
+                        <div class="input-group col-6">
+                            <label for="takeProfit">Take Profit (Optional)</label>
+                            <input type="number" id="takeProfit" placeholder="0.00" step="any" min="0">
+                        </div>
+                    </div>
+
+                    <!-- Error Display -->
+                    <div id="errorDisplay" class="error-message" style="display:none;"></div>
+                </form>
+            </section>
+
+            <section class="card output-card">
+                <div class="card-header">
+                    <h2>Risk Analysis</h2>
+                    <button id="btnCopy" class="btn btn-primary">Copy Results</button>
+                </div>
+
+                <div class="results-container">
+                    <div class="result-tile primary-tile">
+                        <span class="result-label">Recommended Units / Lot Size</span>
+                        <span id="outLotSize" class="result-value highlighted">0.00 Lots</span>
+                    </div>
+
+                    <div class="results-grid">
+                        <div class="result-tile">
+                            <span class="result-label">Dollar Risk</span>
+                            <span id="outDollarRisk" class="result-value risk-text">$0.00</span>
+                        </div>
+                        <div class="result-tile">
+                            <span class="result-label">Stop Loss Distance</span>
+                            <span id="outSlDistance" class="result-value">0.0 pips</span>
+                        </div>
+                    </div>
+
+                    <div class="results-grid">
+                        <div class="result-tile">
+                            <span class="result-label">Risk Reward Ratio (R:R)</span>
+                            <span id="outRrRatio" class="result-value rr-text">--</span>
+                        </div>
+                        <div class="result-tile">
+                            <span class="result-label">Potential Loss</span>
+                            <span id="outPotentialLoss" class="result-value risk-text">$0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="result-tile profit-tile">
+                        <span class="result-label">Potential Profit</span>
+                        <span id="outPotentialProfit" class="result-value profit-text">$0.00</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <div id="toast" class="toast hidden">Results copied to clipboard!</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

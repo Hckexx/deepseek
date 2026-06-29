@@ -1,0 +1,48 @@
+/* ==========================================================================
+   DIRECTION TOGGLE & ERROR STYLES (add to existing CSS)
+   ========================================================================== */
+.direction-toggle {
+    display: flex;
+    gap: 8px;
+}
+
+.dir-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--input-bg);
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.dir-btn.active {
+    background: var(--accent-blue);
+    border-color: var(--accent-blue);
+    color: white;
+}
+
+.dir-btn:not(.active):hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.error-message {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(242, 54, 69, 0.08);
+    border: 1px solid rgba(242, 54, 69, 0.3);
+    border-radius: 8px;
+    color: var(--accent-red);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Adjust spacing for toggle */
+.input-group .direction-toggle {
+    margin-top: 2px;
+}
